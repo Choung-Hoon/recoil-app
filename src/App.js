@@ -1,11 +1,6 @@
 import "./App.css";
-import { atom, useRecoilState } from "recoil";
-
-// atom 설정
-const recoilState = atom({
-  key: "count",
-  default: 10,
-});
+import { useRecoilState } from "recoil";
+import { recoilState } from "./atom";
 
 function Counter() {
   const [count, setCount] = useRecoilState(recoilState);
