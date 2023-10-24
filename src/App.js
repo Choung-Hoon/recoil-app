@@ -1,38 +1,40 @@
 import "./App.css";
-import { useState } from "react";
+import { atom, useRecoilState } from "recoil";
 
-function Counter(props) {
+// atom 설정
+const recoilState = atom({
+  key: "count",
+  default: 10,
+});
+
+function Counter() {
+  const [count, setCount] = useRecoilState(recoilState);
+
   return (
     <div>
       <h1>Counter</h1>
       <button
         onClick={() => {
-          props.onUp();
+          setCount(count + 1);
         }}
       >
         +
       </button>
-      {props.count}
+      {count}
     </div>
   );
 }
 
-function DisplayCounter(props) {
-  return <div>{props.count}</div>;
+function DisplayCounter() {
+  const [count] = useRecoilState(recoilState);
+  return <div>{count}</div>;
 }
 
 function App() {
-  const [count, setCount] = useState(20);
-
   return (
     <div>
-      <Counter
-        count={count}
-        onUp={() => {
-          setCount(count + 1);
-        }}
-      />
-      <DisplayCounter count={count} />
+      <Counter />
+      <DisplayCounter />
     </div>
   );
 }
